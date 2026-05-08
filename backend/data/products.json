@@ -1,0 +1,29 @@
+[
+  {
+    "id": "shoe-001",
+    "name": "Black Running Shoes",
+    "description": "Lightweight daily trainer with breathable mesh upper.",
+    "color": "black",
+    "price": 89.99,
+    "image_url": "https://example.com/images/black-running-shoes.jpg",
+    "category": "running shoes"
+  },
+  {
+    "id": "mouse-001",
+    "name": "Wireless Gaming Mouse",
+    "description": "Ergonomic mouse with low-latency wireless connection.",
+    "color": "black",
+    "price": 59.99,
+    "image_url": "https://example.com/images/wireless-gaming-mouse.jpg",
+    "category": "gaming accessories"
+  },
+  {
+    "id": "hoodie-001",
+    "name": "Minimalist White Hoodie",
+    "description": "Soft cotton hoodie with clean front design.",
+    "color": "white",
+    "price": 64.0,
+    "image_url": "https://example.com/images/minimalist-white-hoodie.jpg",
+    "category": "hoodies"
+  }
+]
