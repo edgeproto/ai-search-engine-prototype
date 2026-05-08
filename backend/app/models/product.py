@@ -9,3 +9,4 @@ class Product(BaseModel):
     price: float = Field(ge=0)
     image_url: str | None = None
     category: str | None = None
+    tags: list[str] = Field(default_factory=list)
