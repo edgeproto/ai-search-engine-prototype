@@ -1,29 +1,244 @@
 [
   {
     "id": "shoe-001",
-    "name": "Black Running Shoes",
-    "description": "Lightweight daily trainer with breathable mesh upper.",
+    "name": "Eclipse Glide 2 Running Shoes",
+    "description": "Lightweight daily trainer with breathable mesh upper, responsive foam midsole, and a grippy rubber outsole for everyday road runs.",
     "color": "black",
     "price": 89.99,
-    "image_url": "https://example.com/images/black-running-shoes.jpg",
-    "category": "running shoes"
+    "image_url": "https://picsum.photos/seed/shoe-001/600/600",
+    "category": "running shoes",
+    "tags": ["running", "daily trainer", "mesh", "lightweight", "men", "women"]
   },
+  {
+    "id": "shoe-002",
+    "name": "Stride Pro Lite Marathon Shoes",
+    "description": "Premium black race-day running shoes with a carbon-infused plate and high-rebound foam tuned for long-distance speed.",
+    "color": "black",
+    "price": 139.0,
+    "image_url": "https://picsum.photos/seed/shoe-002/600/600",
+    "category": "running shoes",
+    "tags": ["running", "race", "carbon plate", "marathon", "premium"]
+  },
+  {
+    "id": "shoe-003",
+    "name": "Cloudwalk 7 Running Shoes",
+    "description": "Soft, cushioned white running shoes with a knit upper and plush insole, ideal for easy recovery miles and casual wear.",
+    "color": "white",
+    "price": 109.0,
+    "image_url": "https://picsum.photos/seed/shoe-003/600/600",
+    "category": "running shoes",
+    "tags": ["running", "cushioned", "knit", "recovery", "white"]
+  },
+  {
+    "id": "shoe-004",
+    "name": "Horizon Runner Road Shoes",
+    "description": "Affordable navy running shoes with a stable heel counter and breathable mesh, built for new runners and short tempo sessions.",
+    "color": "navy",
+    "price": 79.0,
+    "image_url": "https://picsum.photos/seed/shoe-004/600/600",
+    "category": "running shoes",
+    "tags": ["running", "budget", "stable", "beginner", "blue"]
+  },
+  {
+    "id": "shoe-005",
+    "name": "Trailblaze GTX Trail Runners",
+    "description": "Red waterproof trail running shoes with aggressive lug pattern and a rock plate for technical mountain terrain.",
+    "color": "red",
+    "price": 129.0,
+    "image_url": "https://picsum.photos/seed/shoe-005/600/600",
+    "category": "running shoes",
+    "tags": ["trail running", "waterproof", "rugged", "outdoor"]
+  },
+  {
+    "id": "shoe-006",
+    "name": "Pulse Air Womens Running Shoes",
+    "description": "Pink womens running shoes with a soft sock-fit collar, energy-return midsole, and a flexible outsole for everyday training.",
+    "color": "pink",
+    "price": 94.0,
+    "image_url": "https://picsum.photos/seed/shoe-006/600/600",
+    "category": "running shoes",
+    "tags": ["running", "women", "everyday", "energy return"]
+  },
+  {
+    "id": "shoe-007",
+    "name": "Marathon One Cushioned Trainers",
+    "description": "Grey high-stack cushioned running shoes engineered for long mileage with a smooth heel-to-toe transition.",
+    "color": "grey",
+    "price": 159.0,
+    "image_url": "https://picsum.photos/seed/shoe-007/600/600",
+    "category": "running shoes",
+    "tags": ["running", "max cushion", "long distance", "premium"]
+  },
+  {
+    "id": "shoe-008",
+    "name": "SpeedKick Lite Budget Runners",
+    "description": "Neon yellow lightweight running shoes with a simple foam midsole, perfect as a no-frills entry-level pair.",
+    "color": "yellow",
+    "price": 59.0,
+    "image_url": "https://picsum.photos/seed/shoe-008/600/600",
+    "category": "running shoes",
+    "tags": ["running", "budget", "lightweight", "entry level"]
+  },
+
   {
     "id": "mouse-001",
-    "name": "Wireless Gaming Mouse",
-    "description": "Ergonomic mouse with low-latency wireless connection.",
+    "name": "Volt Wireless Pro Gaming Mouse",
+    "description": "Ergonomic black wireless gaming mouse with a low-latency 2.4GHz dongle, 26000 DPI optical sensor, and 70-hour battery life.",
     "color": "black",
-    "price": 59.99,
-    "image_url": "https://example.com/images/wireless-gaming-mouse.jpg",
-    "category": "gaming accessories"
+    "price": 79.0,
+    "image_url": "https://picsum.photos/seed/mouse-001/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wireless", "ergonomic", "low latency", "rgb"]
   },
   {
+    "id": "mouse-002",
+    "name": "Volt Wireless Pro Snow Edition",
+    "description": "White wireless gaming mouse with the same low-latency wireless engine and tunable weights for a personalized feel.",
+    "color": "white",
+    "price": 79.0,
+    "image_url": "https://picsum.photos/seed/mouse-002/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wireless", "white", "low latency"]
+  },
+  {
+    "id": "mouse-003",
+    "name": "PrismRGB X Gaming Mouse",
+    "description": "Wired RGB gaming mouse with programmable buttons, on-the-fly DPI switching, and customizable lighting zones.",
+    "color": "black",
+    "price": 49.0,
+    "image_url": "https://picsum.photos/seed/mouse-003/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "rgb", "wired", "programmable"]
+  },
+  {
+    "id": "mouse-004",
+    "name": "Featherline Air Lightweight Wireless Mouse",
+    "description": "Ultralight 58g wireless gaming mouse with PTFE skates, low click latency, and a honeycomb-free shell.",
+    "color": "black",
+    "price": 99.0,
+    "image_url": "https://picsum.photos/seed/mouse-004/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wireless", "ultralight", "esports"]
+  },
+  {
+    "id": "mouse-005",
+    "name": "Grip Ergo Wired Gaming Mouse",
+    "description": "Ergonomic wired gaming mouse shaped for palm grip with rubberized side panels and a braided cable.",
+    "color": "black",
+    "price": 39.0,
+    "image_url": "https://picsum.photos/seed/mouse-005/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wired", "ergonomic", "palm grip", "budget"]
+  },
+  {
+    "id": "mouse-006",
+    "name": "Apex Esports Wireless Mouse",
+    "description": "Tournament-grade wireless gaming mouse with optical switches, 8000Hz polling, and competition-tuned shape.",
+    "color": "black",
+    "price": 149.0,
+    "image_url": "https://picsum.photos/seed/mouse-006/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wireless", "esports", "premium", "8000hz"]
+  },
+  {
+    "id": "mouse-007",
+    "name": "ByteClick Mini Wireless Mouse",
+    "description": "Compact wireless gaming mouse with a small ambidextrous shell, ideal for travel and claw-grip players.",
+    "color": "black",
+    "price": 39.0,
+    "image_url": "https://picsum.photos/seed/mouse-007/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wireless", "compact", "claw grip", "budget"]
+  },
+  {
+    "id": "mouse-008",
+    "name": "ShadowSilent Quiet Wireless Mouse",
+    "description": "Silent-click black wireless gaming mouse engineered for late-night sessions without sacrificing tactile feedback.",
+    "color": "black",
+    "price": 59.0,
+    "image_url": "https://picsum.photos/seed/mouse-008/600/600",
+    "category": "gaming accessories",
+    "tags": ["gaming mouse", "wireless", "silent click", "quiet"]
+  },
+
+  {
     "id": "hoodie-001",
-    "name": "Minimalist White Hoodie",
-    "description": "Soft cotton hoodie with clean front design.",
+    "name": "Cloud Pullover Minimalist Hoodie",
+    "description": "Soft cotton pullover hoodie in clean white with a tonal logo and a relaxed everyday fit, perfect for layering.",
     "color": "white",
     "price": 64.0,
-    "image_url": "https://example.com/images/minimalist-white-hoodie.jpg",
-    "category": "hoodies"
+    "image_url": "https://picsum.photos/seed/hoodie-001/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "minimalist", "cotton", "pullover", "everyday"]
+  },
+  {
+    "id": "hoodie-002",
+    "name": "Heavy Stone Oversized Hoodie",
+    "description": "Black oversized hoodie made from heavyweight 500gsm cotton fleece with a boxy fit and ribbed cuffs.",
+    "color": "black",
+    "price": 89.0,
+    "image_url": "https://picsum.photos/seed/hoodie-002/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "oversized", "heavyweight", "streetwear"]
+  },
+  {
+    "id": "hoodie-003",
+    "name": "Atlas Pullover Hoodie",
+    "description": "Grey heather pullover hoodie with a brushed fleece interior and a kangaroo pocket for cool-weather comfort.",
+    "color": "grey",
+    "price": 74.0,
+    "image_url": "https://picsum.photos/seed/hoodie-003/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "pullover", "fleece", "classic"]
+  },
+  {
+    "id": "hoodie-004",
+    "name": "Voyage Zip Hoodie",
+    "description": "Navy zip-up hoodie with side pockets, drawcord hood, and a midweight fleece body suitable for travel.",
+    "color": "navy",
+    "price": 84.0,
+    "image_url": "https://picsum.photos/seed/hoodie-004/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "zip up", "midweight", "travel"]
+  },
+  {
+    "id": "hoodie-005",
+    "name": "Bivouac Heavy Hoodie",
+    "description": "Olive heavyweight hoodie with a thick fleece lining, oversized hood, and reinforced hem for outdoor wear.",
+    "color": "olive",
+    "price": 99.0,
+    "image_url": "https://picsum.photos/seed/hoodie-005/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "heavyweight", "outdoor", "fleece"]
+  },
+  {
+    "id": "hoodie-006",
+    "name": "Daybreak Cropped Hoodie",
+    "description": "Cream cropped hoodie with a relaxed boxy cut and soft brushed interior, designed for a casual layered look.",
+    "color": "cream",
+    "price": 69.0,
+    "image_url": "https://picsum.photos/seed/hoodie-006/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "cropped", "women", "casual"]
+  },
+  {
+    "id": "hoodie-007",
+    "name": "Linen Sand Minimalist Hoodie",
+    "description": "Beige minimalist hoodie with a clean silhouette, hidden seams, and a midweight cotton blend fabric.",
+    "color": "beige",
+    "price": 72.0,
+    "image_url": "https://picsum.photos/seed/hoodie-007/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "minimalist", "neutral", "cotton blend"]
+  },
+  {
+    "id": "hoodie-008",
+    "name": "Tech Charcoal Fleece Hoodie",
+    "description": "Charcoal technical fleece hoodie with a slim athletic fit, zippered chest pocket, and four-way stretch fabric.",
+    "color": "charcoal",
+    "price": 119.0,
+    "image_url": "https://picsum.photos/seed/hoodie-008/600/600",
+    "category": "hoodies",
+    "tags": ["hoodie", "tech fleece", "athletic", "premium"]
   }
 ]
