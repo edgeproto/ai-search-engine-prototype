@@ -1,11 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { PaginationControls } from "@/components/PaginationControls";
 import { ResultsGrid } from "@/components/ResultsGrid";
 import { SearchBar } from "@/components/SearchBar";
+import { ViewModeToggle, type ResultViewMode } from "@/components/ViewModeToggle";
 import { searchProducts, type SearchResponse } from "@/lib/api";
 
 const defaultQuery = "black running shoes under 100";
+const PAGE_SIZE = 12;
 
 export default function HomePage() {
   const [query, setQuery] = useState(defaultQuery);
@@ -13,6 +16,8 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<SearchResponse | null>(null);
   const [lastQuery, setLastQuery] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [resultView, setResultView] = useState<ResultViewMode>("grid");
 
   const statusText = useMemo(() => {
     if (loading) {
@@ -27,8 +32,25 @@ export default function HomePage() {
     if (data.total === 0) {
       return `No results found for "${data.query}".`;
     }
-    return `Showing ${data.total} result${data.total === 1 ? "" : "s"} for "${data.query}".`;
+    return `${data.total} result${data.total === 1 ? "" : "s"} for "${data.query}".`;
   }, [data, error, loading]);
+
+  const totalPages = useMemo(() => {
+    if (!data?.results.length) {
+      return 1;
+    }
+    return Math.max(1, Math.ceil(data.results.length / PAGE_SIZE));
+  }, [data]);
+
+  const safePage = Math.min(Math.max(1, page), totalPages);
+
+  const paginatedResults = useMemo(() => {
+    if (!data?.results.length) {
+      return [];
+    }
+    const start = (safePage - 1) * PAGE_SIZE;
+    return data.results.slice(start, start + PAGE_SIZE);
+  }, [data, safePage]);
 
   async function runSearch() {
     const currentQuery = query.trim();
@@ -43,6 +65,7 @@ export default function HomePage() {
     try {
       const response = await searchProducts(currentQuery);
       setData(response);
+      setPage(1);
     } catch (err) {
       const message =
         err instanceof Error
@@ -75,7 +98,20 @@ export default function HomePage() {
         ) : null}
       </section>
 
-      {data && data.results.length > 0 ? <ResultsGrid products={data.results} /> : null}
+      {data && data.results.length > 0 ? (
+        <>
+          <div className="resultsToolbar">
+            <ViewModeToggle value={resultView} onChange={setResultView} disabled={loading} />
+          </div>
+          <ResultsGrid products={paginatedResults} viewMode={resultView} />
+          <PaginationControls
+            page={safePage}
+            pageSize={PAGE_SIZE}
+            totalItems={data.results.length}
+            onPageChange={setPage}
+          />
+        </>
+      ) : null}
     </main>
   );
 }
