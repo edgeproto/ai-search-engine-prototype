@@ -1,11 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PaginationControls } from "@/components/PaginationControls";
+import { RecentlyViewedPanel } from "@/components/RecentlyViewedPanel";
 import { ResultsGrid } from "@/components/ResultsGrid";
 import { SearchBar } from "@/components/SearchBar";
 import { ViewModeToggle, type ResultViewMode } from "@/components/ViewModeToggle";
-import { searchProducts, type SearchResponse } from "@/lib/api";
+import {
+  getRecentViews,
+  recordProductView,
+  searchProducts,
+  type Product,
+  type SearchResponse,
+} from "@/lib/api";
+import { getOrCreateSessionId } from "@/lib/session";
 
 const defaultQuery = "black running shoes under 100";
 const PAGE_SIZE = 12;
@@ -18,6 +26,50 @@ export default function HomePage() {
   const [lastQuery, setLastQuery] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [resultView, setResultView] = useState<ResultViewMode>("grid");
+  const [recentViews, setRecentViews] = useState<Product[]>([]);
+  const [sessionId, setSessionId] = useState("");
+
+  useEffect(() => {
+    setSessionId(getOrCreateSessionId());
+  }, []);
+
+  const loadRecentViews = useCallback(async () => {
+    const id = sessionId || getOrCreateSessionId();
+    if (!id) {
+      return;
+    }
+
+    try {
+      const response = await getRecentViews(id);
+      setRecentViews(response.products);
+    } catch {
+      setRecentViews([]);
+    }
+  }, [sessionId]);
+
+  useEffect(() => {
+    if (!sessionId) {
+      return;
+    }
+    void loadRecentViews();
+  }, [sessionId, loadRecentViews]);
+
+  const handleProductView = useCallback(
+    async (product: Product) => {
+      const id = sessionId || getOrCreateSessionId();
+      if (!id) {
+        return;
+      }
+
+      try {
+        await recordProductView(product.id, id);
+        await loadRecentViews();
+      } catch {
+        // View tracking is best-effort; search UI should stay usable.
+      }
+    },
+    [sessionId, loadRecentViews],
+  );
 
   const statusText = useMemo(() => {
     if (loading) {
@@ -63,7 +115,8 @@ export default function HomePage() {
     setLastQuery(currentQuery);
 
     try {
-      const response = await searchProducts(currentQuery);
+      const id = sessionId || getOrCreateSessionId();
+      const response = await searchProducts(currentQuery, id);
       setData(response);
       setPage(1);
     } catch (err) {
@@ -98,12 +151,18 @@ export default function HomePage() {
         ) : null}
       </section>
 
+      <RecentlyViewedPanel products={recentViews} onView={handleProductView} />
+
       {data && data.results.length > 0 ? (
         <>
           <div className="resultsToolbar">
             <ViewModeToggle value={resultView} onChange={setResultView} disabled={loading} />
           </div>
-          <ResultsGrid products={paginatedResults} viewMode={resultView} />
+          <ResultsGrid
+            products={paginatedResults}
+            viewMode={resultView}
+            onView={handleProductView}
+          />
           <PaginationControls
             page={safePage}
             pageSize={PAGE_SIZE}

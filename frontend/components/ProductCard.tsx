@@ -1,18 +1,32 @@
 import Image from "next/image";
+import type { KeyboardEvent } from "react";
 import type { Product } from "@/lib/api";
 
 type ProductCardProps = {
   product: Product;
   variant?: "grid" | "list";
+  onView?: (product: Product) => void;
 };
 
 const fallbackImage =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80";
 
-export function ProductCard({ product, variant = "grid" }: ProductCardProps) {
+export function ProductCard({ product, variant = "grid", onView }: ProductCardProps) {
   const isList = variant === "list";
-  return (
-    <article className={`productCard productCard--${variant}`}>
+
+  function handleActivate() {
+    onView?.(product);
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleActivate();
+    }
+  }
+
+  const cardContent = (
+    <>
       <div className="productImageWrap">
         <Image
           className="productImage"
@@ -35,6 +49,24 @@ export function ProductCard({ product, variant = "grid" }: ProductCardProps) {
           {product.color ? <span className="productColor">{product.color}</span> : null}
         </div>
       </div>
-    </article>
+    </>
+  );
+
+  if (!onView) {
+    return (
+      <article className={`productCard productCard--${variant}`}>{cardContent}</article>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className={`productCard productCard--${variant} productCard--clickable`}
+      onClick={handleActivate}
+      onKeyDown={handleKeyDown}
+      aria-label={`View ${product.name}`}
+    >
+      {cardContent}
+    </button>
   );
 }

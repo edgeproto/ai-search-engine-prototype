@@ -5,9 +5,10 @@ import { ProductCard } from "@/components/ProductCard";
 type ResultsGridProps = {
   products: Product[];
   viewMode: ResultViewMode;
+  onView?: (product: Product) => void;
 };
 
-export function ResultsGrid({ products, viewMode }: ResultsGridProps) {
+export function ResultsGrid({ products, viewMode, onView }: ResultsGridProps) {
   const isList = viewMode === "list";
   return (
     <section
@@ -16,7 +17,7 @@ export function ResultsGrid({ products, viewMode }: ResultsGridProps) {
       aria-label={isList ? "Products as list" : "Products as grid"}
     >
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} variant={viewMode} />
+        <ProductCard key={product.id} product={product} variant={viewMode} onView={onView} />
       ))}
     </section>
   );

@@ -5,25 +5,33 @@ from pathlib import Path
 from app.models.product import Product
 from app.models.search import SearchIntent
 from app.services.openai_client import OpenAIQueryParser
+from app.services.preference_service import PreferenceService
 
 
 class SearchService:
-    def __init__(self, data_path: str | None = None) -> None:
+    def __init__(
+        self,
+        data_path: str | None = None,
+        preference_service: PreferenceService | None = None,
+    ) -> None:
         self._query_parser = OpenAIQueryParser()
         default_path = Path(__file__).resolve().parents[2] / "data" / "products.json"
         self._data_path = Path(data_path) if data_path else default_path
+        self._preference_service = preference_service or PreferenceService()
 
     def parse_intent(self, query: str) -> SearchIntent:
         return self._query_parser.parse_query(query=query)
 
-    def search(self, query: str) -> tuple[SearchIntent, list[Product]]:
+    def search(self, query: str, session_id: str | None = None) -> tuple[SearchIntent, list[Product]]:
         intent = self.parse_intent(query)
         products = self._load_products()
+        preferences = self._preference_service.get_signals(session_id)
         scored_products: list[tuple[float, Product]] = []
 
         for product in products:
             score = self._score_product(product=product, intent=intent)
             if score is not None:
+                score += self._preference_service.boost(product, preferences)
                 scored_products.append((score, product))
 
         ranked = [product for _, product in sorted(scored_products, key=lambda item: (-item[0], item[1].price))]
