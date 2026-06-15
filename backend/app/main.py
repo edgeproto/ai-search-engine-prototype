@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.search import router as search_router
+from app.api.views import router as views_router
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -22,3 +23,4 @@ def health_check() -> dict[str, str]:
 
 
 app.include_router(search_router, prefix=settings.api_prefix)
+app.include_router(views_router, prefix=settings.api_prefix)
