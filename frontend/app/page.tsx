@@ -5,6 +5,7 @@ import { PaginationControls } from "@/components/PaginationControls";
 import { RecentlyViewedPanel } from "@/components/RecentlyViewedPanel";
 import { ResultsGrid } from "@/components/ResultsGrid";
 import { SearchBar } from "@/components/SearchBar";
+import { SortSelect } from "@/components/SortSelect";
 import { ViewModeToggle, type ResultViewMode } from "@/components/ViewModeToggle";
 import {
   getRecentViews,
@@ -14,6 +15,7 @@ import {
   type SearchResponse,
 } from "@/lib/api";
 import { getOrCreateSessionId } from "@/lib/session";
+import { sortProducts, type ResultSortOption } from "@/lib/sortProducts";
 
 const defaultQuery = "black running shoes under 100";
 const PAGE_SIZE = 12;
@@ -26,6 +28,7 @@ export default function HomePage() {
   const [lastQuery, setLastQuery] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [resultView, setResultView] = useState<ResultViewMode>("grid");
+  const [resultSort, setResultSort] = useState<ResultSortOption>("relevance");
   const [recentViews, setRecentViews] = useState<Product[]>([]);
   const [sessionId, setSessionId] = useState("");
 
@@ -87,22 +90,34 @@ export default function HomePage() {
     return `${data.total} result${data.total === 1 ? "" : "s"} for "${data.query}".`;
   }, [data, error, loading]);
 
-  const totalPages = useMemo(() => {
+  const sortedResults = useMemo(() => {
     if (!data?.results.length) {
+      return [];
+    }
+    return sortProducts(data.results, resultSort);
+  }, [data, resultSort]);
+
+  const totalPages = useMemo(() => {
+    if (!sortedResults.length) {
       return 1;
     }
-    return Math.max(1, Math.ceil(data.results.length / PAGE_SIZE));
-  }, [data]);
+    return Math.max(1, Math.ceil(sortedResults.length / PAGE_SIZE));
+  }, [sortedResults]);
 
   const safePage = Math.min(Math.max(1, page), totalPages);
 
   const paginatedResults = useMemo(() => {
-    if (!data?.results.length) {
+    if (!sortedResults.length) {
       return [];
     }
     const start = (safePage - 1) * PAGE_SIZE;
-    return data.results.slice(start, start + PAGE_SIZE);
-  }, [data, safePage]);
+    return sortedResults.slice(start, start + PAGE_SIZE);
+  }, [sortedResults, safePage]);
+
+  function handleSortChange(sort: ResultSortOption) {
+    setResultSort(sort);
+    setPage(1);
+  }
 
   async function runSearch() {
     const currentQuery = query.trim();
@@ -156,6 +171,7 @@ export default function HomePage() {
       {data && data.results.length > 0 ? (
         <>
           <div className="resultsToolbar">
+            <SortSelect value={resultSort} onChange={handleSortChange} disabled={loading} />
             <ViewModeToggle value={resultView} onChange={setResultView} disabled={loading} />
           </div>
           <ResultsGrid
@@ -166,7 +182,7 @@ export default function HomePage() {
           <PaginationControls
             page={safePage}
             pageSize={PAGE_SIZE}
-            totalItems={data.results.length}
+            totalItems={sortedResults.length}
             onPageChange={setPage}
           />
         </>

@@ -124,8 +124,46 @@ body {
 .resultsToolbar {
   margin-top: 1rem;
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
+}
+
+.sortSelect {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.sortSelectLabel {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.sortSelectControl {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.45rem 2rem 0.45rem 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--card);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235b6275' d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+}
+
+.sortSelectControl:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.sortSelectControl:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .viewModeToggle {
